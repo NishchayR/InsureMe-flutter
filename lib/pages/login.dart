@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:insureme/pages/welcome.dart';
 
 
 class Login extends StatefulWidget {
@@ -10,8 +12,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final _textController = TextEditingController();
-  final _textController1 = TextEditingController();
+  var username1 = TextEditingController();
+  final password1 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +62,7 @@ class _LoginState extends State<Login> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(25,10,25,0),
                     child: TextField(
-                      controller: _textController,
+                      controller: username1,
                       style: const TextStyle(color: Colors.white),
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
@@ -70,10 +72,10 @@ class _LoginState extends State<Login> {
                               )
                           ),
                           hintStyle: const TextStyle(color: Colors.white30),
-                          hintText: "nishchayrajpal",
+                          hintText: "nishchay@gmail.com",
                           suffixIcon: IconButton(
                               onPressed: (){
-                                _textController.clear();
+                                username1.clear();
                               },
                               icon: const Icon(
                                 Icons.clear,
@@ -100,7 +102,7 @@ class _LoginState extends State<Login> {
                     padding: const EdgeInsets.fromLTRB(25,10,25,0),
                     child: TextField(
                       obscureText: true,
-                      controller: _textController1,
+                      controller: password1,
                       style: const TextStyle(color: Colors.white),
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
@@ -113,7 +115,7 @@ class _LoginState extends State<Login> {
                           hintText: "*****",
                           suffixIcon: IconButton(
                               onPressed: (){
-                                _textController1.clear();
+                                password1.clear();
                               },
                               icon: const Icon(
                                 Icons.clear,
@@ -122,7 +124,12 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   const SizedBox(height: 15.0,),
-                  ElevatedButton(onPressed: (){},
+                  ElevatedButton(onPressed: (){
+                    FirebaseAuth.instance.signInWithEmailAndPassword(email: username1.text, password: password1.text).then((value) {
+                      print("Loged in ");
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Welcome(username1.text.toString())));
+                    });
+                    },
                     style: const ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(Colors.blueAccent),
                     ), child: const Text("Login"),

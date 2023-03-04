@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "481241273005",
+    "project_id": "insureme-login",
+    "storage_bucket": "insureme-login.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481241273005:android:891a6f0b821a5ccacd2c24",
+        "android_client_info": {
+          "package_name": "com.example.insureme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "481241273005-31i8qd2inocf0liv6vdt5i9k4v43g02j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.insureme",
+            "certificate_hash": "40c55c3f26cba3e88d85fe98abc1549372bd5d5a"
+          }
+        },
+        {
+          "client_id": "481241273005-2tkart44n6tn23u81h1gglpievbs990d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqyP0fbCB2uyyhHVzw6VjGayApo48PYZY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "481241273005-2tkart44n6tn23u81h1gglpievbs990d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

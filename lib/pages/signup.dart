@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -11,9 +12,9 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-  final _textController = TextEditingController();
-  final _textController1 = TextEditingController();
-  final _textController2 = TextEditingController();
+  final username2 = TextEditingController();
+  final password2 = TextEditingController();
+  final repass = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +64,7 @@ class _SignupState extends State<Signup> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(25,10,25,0),
                     child: TextField(
-                      controller: _textController,
+                      controller: username2,
                       style: const TextStyle(color: Colors.white),
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
@@ -73,10 +74,10 @@ class _SignupState extends State<Signup> {
                               )
                           ),
                           hintStyle: const TextStyle(color: Colors.white30),
-                          hintText: "nishchayrajpal",
+                          hintText: "nishchay@gmail.com",
                           suffixIcon: IconButton(
                               onPressed: (){
-                                _textController.clear();
+                                username2.clear();
                               },
                               icon: const Icon(
                                 Icons.clear,
@@ -104,7 +105,7 @@ class _SignupState extends State<Signup> {
                     padding: const EdgeInsets.fromLTRB(25,10,25,0),
                     child: TextField(
                       obscureText: true,
-                      controller: _textController1,
+                      controller: password2,
                       style: const TextStyle(color: Colors.white),
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
@@ -117,7 +118,7 @@ class _SignupState extends State<Signup> {
                           hintText: "*****",
                           suffixIcon: IconButton(
                               onPressed: (){
-                                _textController1.clear();
+                                password2.clear();
                               },
                               icon: const Icon(
                                 Icons.clear,
@@ -145,7 +146,7 @@ class _SignupState extends State<Signup> {
                     padding: const EdgeInsets.fromLTRB(25,10,25,0),
                     child: TextField(
                       obscureText: true,
-                      controller: _textController2,
+                      controller: repass,
                       style: const TextStyle(color: Colors.white),
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
@@ -158,7 +159,7 @@ class _SignupState extends State<Signup> {
                           hintText: "*****",
                           suffixIcon: IconButton(
                               onPressed: (){
-                                _textController1.clear();
+                                repass.clear();
                               },
                               icon: const Icon(
                                 Icons.clear,
@@ -167,7 +168,16 @@ class _SignupState extends State<Signup> {
                     ),
                   ),
                   const SizedBox(height: 15.0,),
-                  ElevatedButton(onPressed: (){},
+                  ElevatedButton(onPressed: (){
+                    FirebaseAuth.instance.createUserWithEmailAndPassword(
+                        email: username2.text,
+                        password: password2.text).then((value){
+                          print("Created new account");
+                    Navigator.pushReplacementNamed(context, '/');
+                    }).onError((error, stackTrace) {
+                      print("Error${error.toString()}");
+                    });
+                  },
                     style: const ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(Colors.blueAccent),
                     ), child: const Text("Sign up"),
